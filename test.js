@@ -1,9 +1,9 @@
 import test from 'ava'
 import sleep from 'es7-sleep'
-import AsyncArray from '.'
+import ParallelArray from '.'
 
 test('asyncForEach', async (t) => {
-  const a = new AsyncArray(1, 2, 3, 4, 5)
+  const a = new ParallelArray(1, 2, 3, 4, 5)
   const now = Date.now()
   await a.asyncForEach(async (value, index, arr) => {
     await sleep(1000 * 1)
@@ -12,7 +12,7 @@ test('asyncForEach', async (t) => {
 })
 
 test('asyncMap', async (t) => {
-  const a = new AsyncArray(1, 2, 3, 4, 5)
+  const a = new ParallelArray(1, 2, 3, 4, 5)
   const now = Date.now()
   let b = await a.asyncMap(async (value, index, arr) => {
     await sleep(1000 * 1)
@@ -25,7 +25,7 @@ test('asyncMap', async (t) => {
 })
 
 test('asyncFilter', async (t) => {
-  const a = new AsyncArray(1, 2, 3, 4, 5)
+  const a = new ParallelArray(1, 2, 3, 4, 5)
   const now = Date.now()
   let b = await a.asyncFilter(async (value, index, arr) => {
     await sleep(1000 * 1)
@@ -35,7 +35,7 @@ test('asyncFilter', async (t) => {
 })
 
 test('asyncSome', async (t) => {
-  const a = new AsyncArray(1, 2, 3, 4, 5)
+  const a = new ParallelArray(1, 2, 3, 4, 5)
   const now = Date.now()
 
   let b = await a.asyncSome(async (value, index, arr) => {
@@ -52,7 +52,7 @@ test('asyncSome', async (t) => {
 })
 
 test('asyncEvery', async (t) => {
-  const a = new AsyncArray(1, 2, 3, 4, 5)
+  const a = new ParallelArray(1, 2, 3, 4, 5)
   const now = Date.now()
   let b = await a.asyncEvery(async (value, index, arr) => {
     await sleep(1000 * 1)
@@ -68,7 +68,7 @@ test('asyncEvery', async (t) => {
 })
 
 test('asyncSort', async (t) => {
-  const a = new AsyncArray(1, 2, 3, 4, 5)
+  const a = new ParallelArray(1, 2, 3, 4, 5)
   const temp = a
   const now = Date.now()
   await a.asyncSort(async (a, b) => {

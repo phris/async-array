@@ -1,4 +1,4 @@
-export default class AsyncArray extends Array {
+export default class ParallelArray extends Array {
   _generatePromises (asyncFunc, group, index) {
     group = group || this.length
     let promises = []
@@ -8,10 +8,20 @@ export default class AsyncArray extends Array {
     return promises
   }
 
+  /**
+   * asyncForEach
+   * @param {Function} asyncFunc 
+   * @param {Number} group 
+   */
   async asyncForEach (asyncFunc, group) {
     await this.asyncMap(asyncFunc, group)
   }
 
+  /**
+   * asyncMap
+   * @param {Function} asyncFunc 
+   * @param {Number} group 
+   */
   async asyncMap (asyncFunc, group) {
     group = group || this.length
     let loop = this.length % group ? this.length / group + 1 : this.length / group
@@ -26,6 +36,11 @@ export default class AsyncArray extends Array {
     return result
   }
 
+  /**
+   * asyncFilter
+   * @param {Function} asyncFunc 
+   * @param {Number} group 
+   */
   async asyncFilter (asyncFunc, group) {
     let temp = await this.asyncMap(asyncFunc, group)
     let result = []
@@ -37,16 +52,30 @@ export default class AsyncArray extends Array {
     return result
   }
 
+  /**
+   * asyncEvery
+   * @param {Function} asyncFunc 
+   * @param {Number} group 
+   */
   async asyncEvery (asyncFunc, group) {
     let temp = await this.asyncMap(asyncFunc, group)
     return temp.every(value => value)
   }
 
+  /**
+   * asyncSome
+   * @param {Function} asyncFunc 
+   * @param {Number} group 
+   */
   async asyncSome (asyncFunc, group) {
     let temp = await this.asyncMap(asyncFunc, group)
     return temp.some(value => value)
   }
 
+  /**
+   * asyncSort
+   * @param {Function} asyncFunc 
+   */
   async asyncSort (asyncFunc) {
     if (this.length < 2) {
       return
@@ -66,9 +95,9 @@ export default class AsyncArray extends Array {
       }
     }
 
-    left = AsyncArray.of(...left)
+    left = ParallelArray.of(...left)
     await left.asyncSort(asyncFunc)
-    right = AsyncArray.of(...right)
+    right = ParallelArray.of(...right)
     await right.asyncSort(asyncFunc)
 
     for (let i = 0; i < this.length; i++) {
