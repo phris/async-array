@@ -9,7 +9,7 @@
     "parallel"
   ],
   "scripts": {
-    "test": "ava",
+    "test": "nyc ava && nyc report --reporter=text-lcov | coveralls",
     "build": "babel index.js --out-dir lib"
   },
   "repository": {
@@ -25,7 +25,9 @@
     "babel-plugin-transform-es2015-classes": "^6.24.1",
     "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "coveralls": "^3.0.0",
     "es7-sleep": "^1.0.0",
-    "eslint": "^4.17.0"
+    "eslint": "^4.17.0",
+    "nyc": "^11.4.1"
   }
 }
