@@ -35,7 +35,7 @@ await arr.asyncEvery(async(value, index, arr) => {
   ...
 }, 1)
 
-await arr.asyncSort(async(value, index, arr) => {
+await arr.asyncSort(async(a, b) => {
   ...
 })
 ```
