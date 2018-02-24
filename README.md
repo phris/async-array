@@ -1,6 +1,15 @@
 ### ParallelArray
 ParallelArray is the subclass of Array, implements some async function, for example: asyncForEach、asyncMap、asyncFilter etc
 
+<div align="left">
+  <a href="https://travis-ci.org/phris/parallel-array">
+    <img src="https://travis-ci.org/phris/parallel-array.svg?branch=master" alt="Travis CI" />
+  </a>
+  <a href="https://coveralls.io/github/phris/parallel-array">
+    <img class="notice-badge" src="https://coveralls.io/repos/github/phris/parallel-array/badge.svg?branch=master" alt="Badge">
+  </a>
+</div>
+
 ```javascript
 let arr = new ParallelArray(1, 2, 3, 4, 5)
 await arr.asyncForEach(async(value, index, arr) => {
