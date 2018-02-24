@@ -8,6 +8,9 @@ ParallelArray is the subclass of Array, implements some async function, for exam
   <a href="https://coveralls.io/github/phris/parallel-array">
     <img class="notice-badge" src="https://coveralls.io/repos/github/phris/parallel-array/badge.svg?branch=master" alt="Badge">
   </a>
+  <a href="https://gitter.im/phris/parallel-array?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge">
+    <img src="https://badges.gitter.im/phris/parallel-array.svg" alt="Join the chat at https://gitter.im/cheeriojs/cheerio" />
+  </a>
 </div>
 
 ```javascript
