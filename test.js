@@ -29,7 +29,7 @@ test('asyncFilter', async (t) => {
   const now = Date.now()
   let b = await a.asyncFilter(async (value, index, arr) => {
     await sleep(1000 * 1)
-    return Date.now() - now > 3000
+    return Date.now() - now >= 3000
   }, 1)
   t.true(b.join() === [3, 4, 5].join())
 })
