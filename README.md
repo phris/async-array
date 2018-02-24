@@ -1,4 +1,6 @@
 ### ParallelArray
+
+[![Join the chat at https://gitter.im/phris/parallel-array](https://badges.gitter.im/phris/parallel-array.svg)](https://gitter.im/phris/parallel-array?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ParallelArray is the subclass of Array, implements some async function, for example: asyncForEach、asyncMap、asyncFilter etc
 
 <div align="left">
