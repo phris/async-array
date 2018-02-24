@@ -1,40 +1,76 @@
-import schedule from 'node-schedule'
+import test from 'ava'
 import sleep from 'es7-sleep'
 import AsyncArray from '.'
 
-const test = async () => {
+test('asyncForEach', async (t) => {
   const a = new AsyncArray(1, 2, 3, 4, 5)
   const now = Date.now()
-  console.log(a instanceof AsyncArray)
   await a.asyncForEach(async (value, index, arr) => {
     await sleep(1000 * 1)
-    console.log(index, Date.now() - now)
   }, 3)
+  t.true(Date.now() - now > 2000)
+})
 
+test('asyncMap', async (t) => {
+  const a = new AsyncArray(1, 2, 3, 4, 5)
+  const now = Date.now()
   let b = await a.asyncMap(async (value, index, arr) => {
     await sleep(1000 * 1)
     return Date.now() - now
-  }, 3)
-  console.log(b.join())
+  }, 1)
+  t.true(b.length === a.length)
+  b.map((item, index) => {
+    t.true(item > parseInt(index / 2) * 1000)
+  })
+})
 
-  let c = await a.asyncFilter(async (value, index, arr) => {
+test('asyncFilter', async (t) => {
+  const a = new AsyncArray(1, 2, 3, 4, 5)
+  const now = Date.now()
+  let b = await a.asyncFilter(async (value, index, arr) => {
     await sleep(1000 * 1)
-    return Date.now() - now > 6000
-  }, 3)
-  console.log(c.join())
+    return Date.now() - now > 3000
+  }, 1)
+  t.true(b.join() === [3, 4, 5].join())
+})
 
-  let d = await a.asyncSome(async (value, index, arr) => {
+test('asyncSome', async (t) => {
+  const a = new AsyncArray(1, 2, 3, 4, 5)
+  const now = Date.now()
+
+  let b = await a.asyncSome(async (value, index, arr) => {
     await sleep(1000 * 1)
-    return Date.now() - now > 8000
-  }, 3)
-  console.log(d)
+    return Date.now() - now > 2000
+  })
+  t.false(b)
 
-  let e = await a.asyncEvery(async (value, index, arr) => {
+  let c = await a.asyncSome(async (value, index, arr) => {
     await sleep(1000 * 1)
-    return Date.now() - now < 9000
-  }, 3)
-  console.log(e)
+    return Date.now() - now > 2000
+  })
+  t.true(c)
+})
 
+test('asyncEvery', async (t) => {
+  const a = new AsyncArray(1, 2, 3, 4, 5)
+  const now = Date.now()
+  let b = await a.asyncEvery(async (value, index, arr) => {
+    await sleep(1000 * 1)
+    return Date.now() - now < 2000
+  })
+  t.true(b)
+
+  let c = await a.asyncEvery(async (value, index, arr) => {
+    await sleep(1000 * 1)
+    return Date.now() - now < 2000
+  })
+  t.false(c)
+})
+
+test('asyncSort', async (t) => {
+  const a = new AsyncArray(1, 2, 3, 4, 5)
+  const temp = a
+  const now = Date.now()
   await a.asyncSort(async (a, b) => {
     await sleep(1000 * 1)
     if (a > b) {
@@ -45,11 +81,19 @@ const test = async () => {
       return -1
     }
   })
-  console.log(a.join())
-}
+  t.true(a === temp)
+  t.true(a.join() === [1, 2, 3, 4, 5].join())
 
-test()
-
-schedule.scheduleJob({minute: 5}, () => {
-  console.log(new Date())
+  await a.asyncSort(async (a, b) => {
+    await sleep(1000 * 1)
+    if (a > b) {
+      return -1
+    } else if (a === b) {
+      return 0
+    } else {
+      return 1
+    }
+  })
+  t.true(a === temp)
+  t.true(a.join() === [5, 4, 3, 2, 1].join())
 })

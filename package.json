@@ -1,6 +1,6 @@
 {
   "name": "async-array",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "AsyncArray implements the async functions of forEach、map、every etc",
   "main": "lib/index.js",
   "keywords": [
@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "test": "ava",
-    "build": "nodemon --ignore lib --exec babel src --out-dir lib"
+    "build": "nodemon --ignore lib --exec babel index.js --out-dir lib"
   },
   "repository": {
     "type": "git",

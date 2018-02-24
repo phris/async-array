@@ -13,9 +13,9 @@ export default class AsyncArray extends Array {
   }
 
   async asyncMap (asyncFunc, group) {
-    let loop = group ?
-                this.length % group ? this.length % group + 1 : this.length % group :
-                1
+    group = group || this.length
+    let loop = this.length % group ? this.length / group + 1 : this.length / group
+    loop = parseInt(loop)
     let result = []
 
     for (let i = 0; i < loop; i++) {
@@ -60,9 +60,9 @@ export default class AsyncArray extends Array {
     for (let i = 0; i < this.length; i++) {
       let compareResult = await asyncFunc(this[i], midValue)
       if (compareResult < 0) {
-        right.push(this[i])
-      } else if (compareResult > 0) {
         left.push(this[i])
+      } else if (compareResult > 0) {
+        right.push(this[i])
       }
     }
 
