@@ -1,6 +1,6 @@
 {
   "name": "parallel-array",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "ParallelArray implements the async functions of forEach、map、every etc",
   "main": "lib/index.js",
   "keywords": [
