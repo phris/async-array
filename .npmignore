@@ -1,0 +1,6 @@
+.nyc_output/**
+index.js
+test.js
+.eslintrc
+.travis.yml
+.babelrc

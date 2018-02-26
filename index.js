@@ -1,7 +1,9 @@
 /**
  * ParallelArray is the subclass of Array, implements some async function
  * for example: asyncForEach、asyncMap、asyncFilter etc
+ * @class
  * @extends Array
+ * @public
  */
 export default class ParallelArray extends Array {
   /**
@@ -24,6 +26,7 @@ export default class ParallelArray extends Array {
    * asyncForEach
    * @param {Function} asyncFunc
    * @param {Number} [group]
+   * @public
    */
   async asyncForEach (asyncFunc, group) {
     await this.asyncMap(asyncFunc, group)
@@ -34,6 +37,7 @@ export default class ParallelArray extends Array {
    * @param {Function} asyncFunc
    * @param {Number} [group]
    * @returns {Array}
+   * @public
    */
   async asyncMap (asyncFunc, group) {
     group = group || this.length
@@ -54,6 +58,7 @@ export default class ParallelArray extends Array {
    * @param {Function} asyncFunc
    * @param {Number} [group]
    * @returns {Array}
+   * @public
    */
   async asyncFilter (asyncFunc, group) {
     let temp = await this.asyncMap(asyncFunc, group)
@@ -71,6 +76,7 @@ export default class ParallelArray extends Array {
    * @param {Function} asyncFunc
    * @param {Number} [group]
    * @returns {Boolean}
+   * @public
    */
   async asyncEvery (asyncFunc, group) {
     let temp = await this.asyncMap(asyncFunc, group)
@@ -82,6 +88,7 @@ export default class ParallelArray extends Array {
    * @param {Function} asyncFunc
    * @param {Number} [group]
    * @returns {Boolean}
+   * @public
    */
   async asyncSome (asyncFunc, group) {
     let temp = await this.asyncMap(asyncFunc, group)
@@ -91,6 +98,7 @@ export default class ParallelArray extends Array {
   /**
    * asyncSort
    * @param {Function} asyncFunc
+   * @public
    */
   async asyncSort (asyncFunc) {
     if (this.length < 2) {
