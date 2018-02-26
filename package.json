@@ -1,8 +1,9 @@
 {
   "name": "parallel-array",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "ParallelArray implements the async functions of forEach、map、every etc",
   "main": "lib/index.js",
+  "typings": "index.d.ts",
   "keywords": [
     "async",
     "array",
@@ -29,5 +30,8 @@
     "es7-sleep": "^1.0.0",
     "eslint": "^4.17.0",
     "nyc": "^11.4.1"
+  },
+  "engines": {
+    "node": ">= 6.10"
   }
 }

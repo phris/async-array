@@ -1,7 +1,16 @@
-### ParallelArray
+# ParallelArray
 ParallelArray is the subclass of Array, implements some async function, for example: asyncForEach、asyncMap、asyncFilter etc
 
 <div align="left">
+  <a href="https://www.npmjs.com/package/parallel-array">
+    <img src="https://img.shields.io/node/v/parallel-array.svg" alt="npm" />
+  </a>
+  <a href="https://www.npmjs.com/package/parallel-array">
+    <img src="https://badge.fury.io/js/parallel-array.svg" alt="npm" />
+  </a>
+  <a href="https://www.npmjs.com/package/parallel-array">
+    <img src="https://img.shields.io/npm/dm/parallel-array.svg" alt="npm" />
+  </a>
   <a href="https://travis-ci.org/phris/parallel-array">
     <img src="https://travis-ci.org/phris/parallel-array.svg?branch=master" alt="Travis CI" />
   </a>
@@ -13,7 +22,15 @@ ParallelArray is the subclass of Array, implements some async function, for exam
   </a>
 </div>
 
+## Install
+```sh
+npm install parallel-array
+```
+
+## Quick Example
 ```javascript
+import ParallelArray from 'parallel-array'
+
 let arr = new ParallelArray(1, 2, 3, 4, 5)
 await arr.asyncForEach(async(value, index, arr) => {
   ...

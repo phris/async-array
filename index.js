@@ -9,7 +9,7 @@ export default class ParallelArray extends Array {
   /**
    * _generatePromises
    * @private
-   * @param {Function} asyncFunc 
+   * @param {Promise} asyncFunc 
    * @param {Number} group 
    * @param {Number} index 
    */
@@ -24,7 +24,7 @@ export default class ParallelArray extends Array {
 
   /**
    * asyncForEach
-   * @param {Function} asyncFunc
+   * @param {Promise} asyncFunc
    * @param {Number} [group]
    * @public
    */
@@ -34,7 +34,7 @@ export default class ParallelArray extends Array {
 
   /**
    * asyncMap
-   * @param {Function} asyncFunc
+   * @param {Promise} asyncFunc
    * @param {Number} [group]
    * @returns {Array}
    * @public
@@ -55,7 +55,7 @@ export default class ParallelArray extends Array {
 
   /**
    * asyncFilter
-   * @param {Function} asyncFunc
+   * @param {Promise} asyncFunc
    * @param {Number} [group]
    * @returns {Array}
    * @public
@@ -73,7 +73,7 @@ export default class ParallelArray extends Array {
 
   /**
    * asyncEvery
-   * @param {Function} asyncFunc
+   * @param {Promise} asyncFunc
    * @param {Number} [group]
    * @returns {Boolean}
    * @public
@@ -85,7 +85,7 @@ export default class ParallelArray extends Array {
 
   /**
    * asyncSome
-   * @param {Function} asyncFunc
+   * @param {Promise} asyncFunc
    * @param {Number} [group]
    * @returns {Boolean}
    * @public
@@ -97,7 +97,7 @@ export default class ParallelArray extends Array {
 
   /**
    * asyncSort
-   * @param {Function} asyncFunc
+   * @param {Promise} asyncFunc
    * @public
    */
   async asyncSort (asyncFunc) {
