@@ -1,5 +1,5 @@
 # ParallelArray
-ParallelArray is the subclass of Array, implements some async function, for example: asyncForEach、asyncMap、asyncFilter etc
+ParallelArray is the subclass of Array, implements some async function, for example: asyncForEach、asyncMap、asyncFilter etc. The funciton of Array which return an instance of Array will return an instance of ParallelArray in ParallelArray.
 
 <div align="left">
   <a href="https://www.npmjs.com/package/parallel-array">
@@ -28,10 +28,31 @@ npm install parallel-array
 ```
 
 ## Quick Example
+### Init
+```javascript
+const arr = new ParallelArray(1, 2, 3, 4, 5)
+```
+
+```javascript
+const arr = ParallelArray.from([1, 2, 3, 4, 5])
+```
+
+```javascript
+const arr = await ParallelArray.asyncFrom([1, 2, 3, 4], async (value) => {
+  ...
+})
+```
+
+```javascript
+const arr = ParallelArray.of(1, 2, 3, 4, 5)
+```
+
+### Use
 ```javascript
 import ParallelArray from 'parallel-array'
 
-let arr = new ParallelArray(1, 2, 3, 4, 5)
+const arr = new ParallelArray(1, 2, 3, 4, 5)
+
 await arr.asyncForEach(async(value, index, arr) => {
   ...
 }, 3)
@@ -53,6 +74,22 @@ await arr.asyncEvery(async(value, index, arr) => {
 }, 1)
 
 await arr.asyncSort(async(a, b) => {
+  ...
+})
+
+await arr.asyncReduce(async(p, c) => {
+  ...
+})
+
+await arr.asyncReduceRight(async(p, c) => {
+  ...
+})
+
+await arr.asyncFind(async(value, index, arr) => {
+  ...
+})
+
+await arr.asyncFindIndex(async(value, index, arr) => {
   ...
 })
 ```

@@ -2,6 +2,29 @@ import test from 'ava'
 import sleep from 'es7-sleep'
 import ParallelArray from '.'
 
+test('from', async (t) => {
+  const a = ParallelArray.from([1, 2, 3])
+  t.true(a instanceof ParallelArray)
+  t.true(a.join() === [1, 2, 3].join())
+})
+
+test('asyncFrom', async (t) => {
+  const now = Date.now()
+  const a = await ParallelArray.asyncFrom([1, 2, 3], async (value, index) => {
+    await sleep(1000 * 1)
+    return value * 1000 + Date.now() - now
+  })
+  t.true(a instanceof ParallelArray)
+  t.true(a.length === 3)
+  t.true(a.every(item => item > 1000))
+})
+
+test('of', async (t) => {
+  const a = ParallelArray.of(1, 2, 3)
+  t.true(a instanceof ParallelArray)
+  t.true(a.join() === [1, 2, 3].join())
+})
+
 test('asyncForEach', async (t) => {
   const a = new ParallelArray(1, 2, 3, 4, 5)
   const now = Date.now()
@@ -96,4 +119,76 @@ test('asyncSort', async (t) => {
   })
   t.true(a === temp)
   t.true(a.join() === [5, 4, 3, 2, 1].join())
+})
+
+test('asyncReduce', async (t) => {
+  const a = new ParallelArray(1, 2, 3, 4, 5)
+  const now = Date.now()
+  const sum = await a.asyncReduce(async (p, c) => {
+    await sleep(1000)
+    return p + c * (Date.now() - now)
+  }, 1)
+  t.true(Date.now() - now > 5000)
+  t.true(sum > (1 * 1 + 2 * 2 + 3 * 3 + 4 * 4 + 5 * 5) * 1000)
+})
+
+test('asyncReduceRight', async (t) => {
+  const a = new ParallelArray(1, 2, 3, 4, 5)
+  const now = Date.now()
+  const sum = await a.asyncReduce(async (p, c) => {
+    await sleep(1000)
+    return p + c * (Date.now() - now)
+  }, 1)
+  t.true(Date.now() - now > 5000)
+  t.true(sum > (1 * 5 + 2 * 4 + 3 * 3 + 4 * 2 + 5 * 1) * 1000)
+})
+
+test('asyncFind', async (t) => {
+  const a = new ParallelArray(1, 2, 3, 4, 5)
+  const now = Date.now()
+  const target = await a.asyncFind(async (item) => {
+    await sleep(1000)
+    return item * (Date.now() - now) > 3000
+  })
+  t.true(target === 2)
+})
+
+test('asyncFindIndex', async (t) => {
+  const a = new ParallelArray(1, 2, 3, 4, 5)
+  const now = Date.now()
+  const targetIndex = await a.asyncFindIndex(async (item) => {
+    await sleep(1000)
+    return item * (Date.now() - now) > 3000
+  })
+  t.true(targetIndex === 1)
+})
+
+test('concat', (t) => {
+  const a = new ParallelArray(1, 2, 3, 4, 5)
+  const b = a.concat([2, 3])
+  t.true(b instanceof ParallelArray)
+  t.true(b.length === 7)
+})
+
+test('reverse', (t) => {
+  const a = new ParallelArray(1, 2, 3, 4, 5)
+  const b = a.reverse()
+  t.true(b instanceof ParallelArray)
+  t.true(b.length === a.length)
+  t.true(b.join() === a.join())
+  t.true(a[0] === 5)
+})
+
+test('slice', (t) => {
+  const a = new ParallelArray(1, 2, 3, 4, 5)
+  const b = a.slice(0, 1)
+  t.true(b instanceof ParallelArray)
+  t.true(b.join() === [1].join())
+})
+
+test('splice', (t) => {
+  const a = new ParallelArray(1, 2, 3, 4, 5)
+  const b = a.splice(0, 1)
+  t.true(b instanceof ParallelArray)
+  t.true(b.join() === [1].join())
 })
