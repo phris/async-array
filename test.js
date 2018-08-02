@@ -1,6 +1,6 @@
 import test from 'ava'
 import sleep from 'es7-sleep'
-import ParallelArray from '.'
+import ParallelArray from './lib'
 
 test('from', async (t) => {
   const a = ParallelArray.from([1, 2, 3])
